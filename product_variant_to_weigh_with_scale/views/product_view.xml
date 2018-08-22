@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+    <record id="product_variant_easy_edit_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product_variant_available_in_pos.product_variant_easy_edit_view"/>
+        <field name="arch" type="xml">
+            <field name="available_in_pos" position="after">
+                <field name="to_weight" attrs="{'invisible': [('available_in_pos', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+</data>
+</openerp>
