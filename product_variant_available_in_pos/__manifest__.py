@@ -5,11 +5,14 @@
 {
     'name': 'Product Variant Available In Pos',
     'summary': 'Available In Pos in product level',
-    'version': '8.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Point Of Sale',
     'license': 'AGPL-3',
     'author': 'Agile Business Group, Odoo Community Association (OCA)',
     'website': 'https://www.agilebg.com/',
+    'data': [
+        'views/product_view.xml',
+    ],
     'depends': [
         'point_of_sale',
     ],
