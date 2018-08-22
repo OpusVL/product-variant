@@ -9,14 +9,6 @@ Product Variant Available In Pos
 This module allows to have 'Available in the Point of Sale' flag at
 product level instead of product template.
 
-Please note this module is incompatible with `pos_product_template
-<https://github.com/OCA/pos/tree/8.0/pos_product_template>`_.
-
-Usage
-=====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-
 Bug Tracker
 ===========
 

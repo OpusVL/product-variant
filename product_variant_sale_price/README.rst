@@ -13,11 +13,6 @@ default.
 This module also hides sale price at product template level when has more than
 one variant.
 
-Usage
-=====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-
 Bug Tracker
 ===========
 
