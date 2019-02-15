@@ -9,8 +9,8 @@ from odoo import SUPERUSER_ID, api
 
 def post_init_hook(cr, registry):
 	"""
-	This post-init-hook will copy across all existing product.product
-	taxes_id and supplier_taxes_id
+	This post-init-hook will copy across all existing product.template
+	taxes_id and supplier_taxes_id to the relevant product.product records
 	"""
 	env = api.Environment(cr, SUPERUSER_ID, {})
 	for product in env['product.product'].search([]):
