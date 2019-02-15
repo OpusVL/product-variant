@@ -57,16 +57,20 @@ class ProductVariantTaxesIds(TransactionCase):
         self.product_template.product_variant_ids.invalidate_cache()
         self.assertEqual(
             self.product_template.taxes_id,
-            self.product_1.taxes_id)
+            self.product_1.taxes_id,
+            "Variant should have the same tax as its template after post_init_hook is run")
         self.assertEqual(
             self.product_template.taxes_id,
-            self.product_2.taxes_id)
+            self.product_2.taxes_id,
+            "Variant should have the same tax as its template after post_init_hook is run")
         self.assertEqual(
             self.product_template.supplier_taxes_id,
-            self.product_1.supplier_taxes_id)
+            self.product_1.supplier_taxes_id,
+            "Variant should have the same purchase tax as its template after post_init_hook is run")
         self.assertEqual(
             self.product_template.supplier_taxes_id,
-            self.product_2.supplier_taxes_id)
+            self.product_2.supplier_taxes_id,
+            "Variant should have the same purchase tax as its template after post_init_hook is run")
 
     def test_create_product_template(self):
         new_template = self.template_model.create({
@@ -76,10 +80,12 @@ class ProductVariantTaxesIds(TransactionCase):
         })
         self.assertEqual(
             new_template.taxes_id,
-            new_template.product_variant_ids.taxes_id)
+            new_template.product_variant_ids.taxes_id,
+            "Newly created template should have the same tax as its variants")
         self.assertEqual(
             new_template.supplier_taxes_id,
-            new_template.product_variant_ids.supplier_taxes_id)
+            new_template.product_variant_ids.supplier_taxes_id,
+            "Newly created template should have the same purchase tax as its variants")
 
     def test_create_variant(self):
         new_variant = self.product_model.create({
@@ -87,26 +93,32 @@ class ProductVariantTaxesIds(TransactionCase):
         })
         self.assertEqual(
             self.product_template.taxes_id,
-            new_variant.taxes_id)
+            new_variant.taxes_id,
+            "Newly created variant should have the same tax as its template")
         self.assertEqual(
             self.product_template.supplier_taxes_id,
-            new_variant.taxes_id)
+            new_variant.taxes_id,
+            "Newly created variant should have the same purchase tax as its template")
 
     def test_update_variant(self):
         self.product_1.taxes_id = [[4, self.taxes_id.id]]
         self.product_1.supplier_taxes_id = [[4, self.supplier_taxes_id.id]]
         self.assertNotEqual(
             self.product_1.taxes_id,
-            self.product_1.product_tmpl_id.taxes_id)
+            self.product_1.product_tmpl_id.taxes_id,
+            "After writing a new tax to a variant, the tax should differ from the template tax")
         self.assertNotEqual(
             self.product_1.supplier_taxes_id,
-            self.product_1.product_tmpl_id.supplier_taxes_id)
+            self.product_1.product_tmpl_id.supplier_taxes_id,
+            "After writing a new purchase tax to a variant, the purchase tax should differ from the template purchase tax")
 
     def test_update_template_variant(self):
         self.product_1.product_tmpl_id.taxes_id = False
         self.product_1.product_tmpl_id.supplier_taxes_id = False
         for variant in self.product_1.product_tmpl_id.product_variant_ids:
             self.assertEqual(
-                self.product_1.taxes_id, variant.taxes_id)
+                self.product_1.taxes_id, variant.taxes_id,
+                "Tax should have propagated from template to all variants")
             self.assertEqual(
-                self.product_1.supplier_taxes_id, variant.supplier_taxes_id)
+                self.product_1.supplier_taxes_id, variant.supplier_taxes_id,
+                "Purchase tax should have propagated from template to all variants")
