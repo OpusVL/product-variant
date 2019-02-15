@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<odoo>
+
+    <record id="product_normal_form_view_sellers" model="ir.ui.view">
+        <field name="name">product.product.form.taxes_id</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='pricing']/parent::group"
+               position="after">
+                <group name="variant_taxes" string="Taxes">
+                    <field name="taxes_id"/>
+                    <field name="supplier_taxes_id"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
