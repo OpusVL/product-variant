@@ -14,7 +14,17 @@
                 <separator string="Vendors"/>
                 <group name="variant_suppliers" string="Variant Vendors">
                     <field name="variant_seller_ids" nolabel="1"
-                           context="{'hide_product_id': True}"/>
+                           context="{'hide_product_id': True}">
+                        <tree>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="product_id"/>
+                            <field name="min_qty"/>
+                            <field name="price"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </tree>
+                    </field>
                 </group>
                 <group name="template_uppliers" string="Template Vendors">
                     <field name="tmpl_seller_ids" nolabel="1"
