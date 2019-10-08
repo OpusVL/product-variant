@@ -2,7 +2,7 @@
 
 ##############################################################################
 # Product Weight with Scale
-# Copyright (C) 2018 OpusVL (<http://opusvl.com/>)
+# Copyright (C) 2019 OpusVL (<http://opusvl.com/>)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as

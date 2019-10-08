@@ -7,8 +7,8 @@
         <field name="inherit_id" ref="product_variant_available_in_pos.product_variant_easy_edit_view"/>
         <field name="arch" type="xml">
             <field name="available_in_pos" position="after">
-                 <field name="uom_category_name" invisible="1"/>
-                <field name="to_weight" attrs="{'invisible': ['|', ('available_in_pos', '=', False), ('uom_category_name', '!=', 'Weight')]}"/>
+                 <field name="uom_category_weight" invisible="1"/>
+                <field name="to_weight" attrs="{'invisible': ['|', ('available_in_pos', '=', False), ('uom_category_weight', '!=', True)]}"/>
             </field>
         </field>
     </record>
@@ -18,10 +18,10 @@
         <field name="inherit_id" ref="point_of_sale.product_template_form_view"/>
         <field name="arch" type="xml">
             <field name="available_in_pos" position="after">
-                <field name="uom_category_name" invisible="1"/>
+                <field name="uom_category_weight" invisible="1"/>
             </field>
             <field name="to_weight" position="attributes">
-                <attribute name="attrs">{'invisible': ['|', ('available_in_pos', '=', False), ('uom_category_name', '!=', 'Weight')]}</attribute>
+                <attribute name="attrs">{'invisible': ['|', ('available_in_pos', '=', False), ('uom_category_weight', '!=', True)]}</attribute>
             </field>
         </field>
     </record>

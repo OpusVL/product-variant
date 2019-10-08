@@ -2,7 +2,7 @@
 
 ##############################################################################
 # Product Weight with Scale
-# Copyright (C) 2018 OpusVL (<http://opusvl.com/>)
+# Copyright (C) 2019 OpusVL (<http://opusvl.com/>)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -25,7 +25,7 @@ from odoo import models, fields, api
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    uom_category_name = fields.Char(string="UOM Category Name", compute='_compute_uom_category_name', store=True)
+    uom_category_weight = fields.Boolean(string="UOM Category Weight", compute='_compute_uom_category_weight', store=True)
 
     def _update_to_weight(self, vals):
         values = {'to_weight': vals['to_weight']}
@@ -49,13 +49,15 @@ class ProductTemplate(models.Model):
 
     @api.multi
     @api.depends('uom_id')
-    def _compute_uom_category_name(self):
+    def _compute_uom_category_weight(self):
         for record in self:
-            record.uom_category_name = record.uom_id.category_id.name
+            uom_categ_kgm = self.env.ref("product.product_uom_categ_kgm")
+            record.uom_category_weight = True if record.uom_id.category_id.id == uom_categ_kgm.id else False
 
     @api.onchange('uom_id')
     def _onchange_uom_id(self):
         res = super(ProductTemplate, self)._onchange_uom_id()
         if self.uom_id:
-            self.uom_category_name = self.uom_id.category_id.name
+            uom_categ_kgm = self.env.ref("product.product_uom_categ_kgm")
+            self.uom_category_weight = True if self.uom_id.category_id.id == uom_categ_kgm.id else False
         return res

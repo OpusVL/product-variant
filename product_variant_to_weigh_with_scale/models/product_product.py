@@ -2,7 +2,7 @@
 
 ##############################################################################
 # Product Weight with Scale
-# Copyright (C) 2018 OpusVL (<http://opusvl.com/>)
+# Copyright (C) 2019 OpusVL (<http://opusvl.com/>)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -45,4 +45,5 @@ class ProductProduct(models.Model):
     @api.onchange('uom_id')
     def _onchange_uom_id(self):
         if self.uom_id:
-            self.uom_category_name = self.uom_id.category_id.name
+            uom_categ_kgm = self.env.ref("product.product_uom_categ_kgm")
+            self.uom_category_weight = True if self.uom_id.category_id.id == uom_categ_kgm.id else False
