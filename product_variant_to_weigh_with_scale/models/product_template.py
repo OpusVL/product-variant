@@ -52,12 +52,12 @@ class ProductTemplate(models.Model):
     def _compute_uom_category_weight(self):
         for record in self:
             uom_categ_kgm = self.env.ref("product.product_uom_categ_kgm")
-            record.uom_category_weight = True if record.uom_id.category_id.id == uom_categ_kgm.id else False
+            record.uom_category_weight = (record.uom_id.category_id == uom_categ_kgm)
 
     @api.onchange('uom_id')
     def _onchange_uom_id(self):
         res = super(ProductTemplate, self)._onchange_uom_id()
         if self.uom_id:
             uom_categ_kgm = self.env.ref("product.product_uom_categ_kgm")
-            self.uom_category_weight = True if self.uom_id.category_id.id == uom_categ_kgm.id else False
+            self.uom_category_weight = (self.uom_id.category_id == uom_categ_kgm)
         return res

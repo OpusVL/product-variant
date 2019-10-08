@@ -46,4 +46,5 @@ class ProductProduct(models.Model):
     def _onchange_uom_id(self):
         if self.uom_id:
             uom_categ_kgm = self.env.ref("product.product_uom_categ_kgm")
-            self.uom_category_weight = True if self.uom_id.category_id.id == uom_categ_kgm.id else False
+            self.uom_category_weight = (self.uom_id.category_id == uom_categ_kgm)
+
